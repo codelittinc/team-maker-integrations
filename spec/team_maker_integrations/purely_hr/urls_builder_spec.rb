@@ -1,7 +1,7 @@
 require 'climate_control'
 require 'team_maker_integrations/errors/invalid_period_error'
 
-RSpec.describe TeamMakerIntegrations::PurelyHR do
+RSpec.describe TeamMakerIntegrations::PurelyHR::UrlsBuilder do
   describe '#initialize' do
     context 'when the start date is bigger than the end date' do
       it 'throws an exception' do
@@ -15,7 +15,7 @@ RSpec.describe TeamMakerIntegrations::PurelyHR do
     end
   end
 
-  describe '#url' do
+  describe '#timeoff_requests' do
     let(:instance) do
       start_date = Date.parse('01 Jan 2019')
       end_date = Date.parse('01 May 2019')
@@ -27,7 +27,7 @@ RSpec.describe TeamMakerIntegrations::PurelyHR do
         purelyhr_key = 'my_nice_key'
         url = "https://data.purelyhr.com/xml/?ak=#{purelyhr_key}&sDate=2019/01/01&eDate=2019/05/01"
         ClimateControl.modify PURELY_HR_KEY: purelyhr_key do
-          expect(instance.url).to eql(url)
+          expect(instance.timeoff_requests).to eql(url)
         end
       end
     end
