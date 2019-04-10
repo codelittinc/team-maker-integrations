@@ -1,4 +1,4 @@
-require "team/maker/integrations/version"
+require 'team/maker/integrations/version'
 
 module Team
   module Maker
