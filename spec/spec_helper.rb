@@ -1,5 +1,5 @@
 require 'bundler/setup'
-require 'team/maker/integrations'
+require 'team_maker_integrations/purely_hr/index'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
