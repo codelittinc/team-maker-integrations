@@ -10,6 +10,12 @@ module TeamMakerIntegrations
       raise InvalidPeriodError if start_date > end_date
     end
 
-    def timeoff_requests; end
+    def url
+      base_url = 'https://data.purelyhr.com/xml/'
+      url_with_key = "#{base_url}?ak=#{ENV['PURELY_HR_KEY']}"
+      start_date = @start_date.strftime('%Y/%m/%d')
+      end_date = @end_date.strftime('%Y/%m/%d')
+      "#{url_with_key}&sDate=#{start_date}&eDate=#{end_date}"
+    end
   end
 end
