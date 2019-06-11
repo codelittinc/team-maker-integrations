@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'climate_control'
 require 'team_maker_integrations/errors/invalid_period_error'
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe TeamMakerIntegrations::Request do
   describe '#get' do
     context 'with a valid URL' do

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'climate_control'
 
 RSpec.describe TeamMakerIntegrations::PurelyHR do

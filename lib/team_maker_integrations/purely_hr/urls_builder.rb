@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'date'
 require 'team_maker_integrations/errors/invalid_period_error'
 
