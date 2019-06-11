@@ -10,7 +10,7 @@ RSpec.describe TeamMakerIntegrations::PurelyHR::UrlsBuilder do
 
         expect do
           described_class.new(start_date, end_date)
-        end.to raise_error(InvalidPeriodError)
+        end.to raise_error(TeamMakerIntegrations::InvalidPeriodError)
       end
     end
   end

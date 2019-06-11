@@ -10,7 +10,7 @@ module TeamMakerIntegrations
         @start_date = start_date
         @end_date = end_date
 
-        raise InvalidPeriodError if start_date > end_date
+        raise TeamMakerIntegrations::InvalidPeriodError if start_date > end_date
       end
 
       def timeoff_requests
