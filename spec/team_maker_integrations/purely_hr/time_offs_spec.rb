@@ -7,18 +7,27 @@ RSpec.describe TeamMakerIntegrations::PurelyHR::TimeOffs do
     end
   end
 
-  describe '#times_off' do
-    let(:instance) do
-      start_date = Date.parse('01 Jan 2019')
-      end_date = Date.parse('01 May 2019')
-      described_class.new(start_date, end_date)
-    end
+  context 'with invalid dates' do
+    let(:start_date) { Date.parse('01 May 2019') }
+    let(:end_date) { Date.parse('01 Jan 2019') }
 
-    context 'with valid datess' do
-      it 'returns the xml contents' do
+    it 'raises an InvalidPeriodError' do
+      expect { described_class.new(start_date, end_date) }.to raise_error(TeamMakerIntegrations::InvalidPeriodError)
+    end
+  end
+
+  describe '#search' do
+    context 'with valid dates' do
+      let(:instance) do
+        start_date = Date.parse('01 Jan 2019')
+        end_date = Date.parse('01 May 2019')
+        described_class.new(start_date, end_date)
+      end
+
+      it 'finds the time off requests' do
         VCR.use_cassette('times_off') do
-          content = instance.search
-          expect(content).not_to be ''
+          time_off_requests = instance.search
+          expect(time_off_requests.length).to eq 191
         end
       end
     end

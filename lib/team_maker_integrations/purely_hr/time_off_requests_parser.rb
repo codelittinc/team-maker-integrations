@@ -15,11 +15,13 @@ module TeamMakerIntegrations
 
       def time_offs
         xml = Ox.parse(@xml)
-        root = xml.nodes.first
+        root = xml&.nodes&.first
 
-        raise TeamMakerIntegrations::InvalidXmlError if root.value != ROOT_TAG
+        raise TeamMakerIntegrations::InvalidXmlError if root.nil? || root.value != ROOT_TAG
 
         root.nodes&.map(&method(:build_time_off))
+      rescue Ox::ParseError
+        raise TeamMakerIntegrations::InvalidXmlError
       end
 
       private
