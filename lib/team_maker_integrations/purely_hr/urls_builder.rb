@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
 require 'date'
-require 'team_maker_integrations/errors/invalid_period_error'
 
 module TeamMakerIntegrations
-  class PurelyHR
+  module PurelyHR
     class UrlsBuilder
-      BASE_URL = 'https://data.purelyhr.com'.freeze
+      BASE_URL = 'https://data.purelyhr.com'
 
       def initialize(start_date, end_date)
         @start_date = start_date

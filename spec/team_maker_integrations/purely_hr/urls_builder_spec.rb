@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require 'climate_control'
-require 'team_maker_integrations/errors/invalid_period_error'
-
 RSpec.describe TeamMakerIntegrations::PurelyHR::UrlsBuilder do
   describe '#initialize' do
     context 'when the start date is bigger than the end date' do

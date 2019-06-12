@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require 'climate_control'
-
-RSpec.describe TeamMakerIntegrations::PurelyHR do
+RSpec.describe TeamMakerIntegrations::PurelyHR::TimeOffs do
   around do |example|
     ClimateControl.modify PURELY_HR_KEY: 'TOP_SECRET' do
       example.run
@@ -16,10 +14,10 @@ RSpec.describe TeamMakerIntegrations::PurelyHR do
       described_class.new(start_date, end_date)
     end
 
-    context 'with valid dates' do
-      it 'returns the xml content' do
+    context 'with valid datess' do
+      it 'returns the xml contents' do
         VCR.use_cassette('times_off') do
-          content = instance.times_off
+          content = instance.search
           expect(content).not_to be ''
         end
       end
