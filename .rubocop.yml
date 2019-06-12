@@ -1,5 +1,12 @@
 require: rubocop-rspec
 
+AllCops:
+  TargetRubyVersion: 2.6
+  Exclude:
+    - 'pkg/*'
+    - 'bin/*'
+    - 'team-maker-integrations.gemspec'
+
 Style/Documentation:
   Enabled: false
 
@@ -10,3 +17,9 @@ Metrics/BlockLength:
   Enabled: true
   Exclude:
     - spec/**/*
+RSpec/ExampleLength:
+  Enabled: true
+  Exclude:
+    - spec/**/*
+Style/Lambda:
+  EnforcedStyle: literal

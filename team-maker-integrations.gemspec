@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'team_maker_integrations/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'team-maker-integrations'
-  spec.version       = Team::Maker::Integrations::VERSION
+  spec.version       = TeamMakerIntegrations::VERSION
   spec.authors       = ['kaiomagalhaes']
   spec.email         = ['me@kaiomagalhaes.com']
 
@@ -31,10 +33,19 @@ Gem::Specification.new do |spec|
       f.match(%r{^(test|spec|features)/})
     end
   end
+
   spec.bindir        = 'exe'
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
+  spec.add_runtime_dependency 'climate_control'
+  spec.add_runtime_dependency 'ox', '~> 2.10'
+
+  spec.add_development_dependency 'vcr'
+  spec.add_development_dependency 'webmock'
+  spec.add_development_dependency 'rubocop'
+  spec.add_development_dependency 'rubocop-rspec'
+  spec.add_development_dependency 'rubocop-performance'
   spec.add_development_dependency 'bundler', '~> 1.16'
   spec.add_development_dependency 'rake', '~> 10.0'
   spec.add_development_dependency 'rspec', '~> 3.0'

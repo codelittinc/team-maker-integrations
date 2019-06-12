@@ -1,5 +1,4 @@
-require 'climate_control'
-require 'team_maker_integrations/errors/invalid_period_error'
+# frozen_string_literal: true
 
 RSpec.describe TeamMakerIntegrations::PurelyHR::UrlsBuilder do
   describe '#initialize' do
@@ -10,7 +9,7 @@ RSpec.describe TeamMakerIntegrations::PurelyHR::UrlsBuilder do
 
         expect do
           described_class.new(start_date, end_date)
-        end.to raise_error(InvalidPeriodError)
+        end.to raise_error(TeamMakerIntegrations::InvalidPeriodError)
       end
     end
   end

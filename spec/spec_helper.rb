@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'vcr'
 
 require 'bundler/setup'
-require 'team_maker_integrations/purely_hr/index'
-require 'team_maker_integrations/request'
+require 'team_maker_integrations/team_maker_integrations'
+require 'climate_control'
 
 VCR.configure do |config|
   config.cassette_library_dir = 'spec/fixtures/vcr_cassettes'

@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<DataService>
+  <Request ID="123456" Status="Pending">
+    <TimeOffDate>2019-01-31</TimeOffDate>
+    <TimeOffDayOfWeek>Thursday</TimeOffDayOfWeek>
+    <TimeStart/>
+    <TimeEnd/>
+    <TimeOffHours>8.000</TimeOffHours>
+    <TimeOffTypeName>Vacation</TimeOffTypeName>
+    <LoginID>batman</LoginID>
+    <Firstname>Bruce</Firstname>
+    <Lastname>Wayne</Lastname>
+    <UserCategory>Super heroes</UserCategory>
+    <SubmittedDate>2019-01-17</SubmittedDate>
+    <Deducted>Yes</Deducted>
+  </Request>
+  <Request ID="7891011" Status="Approved">
+    <TimeOffDate>2019-01-30</TimeOffDate>
+    <TimeOffDayOfWeek>Wednesday</TimeOffDayOfWeek>
+    <TimeStart>2019-01-30T10:15:00</TimeStart>
+    <TimeEnd>2019-01-30T12:45:00</TimeEnd>
+    <TimeOffHours>2.500</TimeOffHours>
+    <TimeOffTypeName>Appointment</TimeOffTypeName>
+    <LoginID>robin</LoginID>
+    <Firstname>Dick</Firstname>
+    <Lastname>Grayson</Lastname>
+    <UserCategory/>
+    <SubmittedDate>2019-01-28</SubmittedDate>
+    <Deducted>No</Deducted>
+  </Request>
+</DataService>
