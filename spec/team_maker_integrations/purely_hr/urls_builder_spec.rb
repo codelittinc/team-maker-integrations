@@ -24,7 +24,7 @@ RSpec.describe TeamMakerIntegrations::PurelyHR::UrlsBuilder do
     context 'when the environment variable is set' do
       it 'returns a valid url' do
         purelyhr_key = 'my_nice_key'
-        url = "https://data.purelyhr.com/xml/?ak=#{purelyhr_key}&sDate=2019/01/01&eDate=2019/05/01"
+        url = "https://data.purelyhr.com/xml/?ak=#{purelyhr_key}&sDate=01/01/2019&eDate=05/01/2019"
         ClimateControl.modify PURELY_HR_KEY: purelyhr_key do
           expect(instance.timeoff_requests).to eql(url)
         end

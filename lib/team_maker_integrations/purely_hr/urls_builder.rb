@@ -24,7 +24,7 @@ module TeamMakerIntegrations
       private
 
       def parse_date(date)
-        date.strftime('%Y/%m/%d')
+        date.strftime('%m/%d/%Y')
       end
 
       def url_with_key(url)
