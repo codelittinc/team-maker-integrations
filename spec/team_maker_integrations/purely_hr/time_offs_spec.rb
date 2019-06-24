@@ -19,15 +19,15 @@ RSpec.describe TeamMakerIntegrations::PurelyHR::TimeOffs do
   describe '#search' do
     context 'with valid dates' do
       let(:instance) do
-        start_date = Date.parse('01 Jan 2019')
-        end_date = Date.parse('01 May 2019')
+        start_date = Date.parse('2019-01-02')
+        end_date = Date.parse('2019-01-02')
         described_class.new(start_date, end_date)
       end
 
       it 'finds the time off requests' do
         VCR.use_cassette('times_off') do
           time_off_requests = instance.search
-          expect(time_off_requests.length).to eq 191
+          expect(time_off_requests.length).to eq 4
         end
       end
     end

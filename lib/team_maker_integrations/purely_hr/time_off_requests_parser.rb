@@ -7,6 +7,7 @@ module TeamMakerIntegrations
   module PurelyHR
     class TimeOffRequestsParser
       ROOT_TAG = 'DataService'
+      ENCODING = 'UTF-8'
 
       def initialize(xml)
         @xml = xml
@@ -14,6 +15,7 @@ module TeamMakerIntegrations
       end
 
       def time_offs
+        Ox.default_options = { encoding: ENCODING }
         xml = Ox.parse(@xml)
         root = xml&.nodes&.first
 
@@ -26,6 +28,8 @@ module TeamMakerIntegrations
 
       private
 
+      #  rubocop:disable Metrics/MethodLength
+      #  rubocop:disable Metrics/AbcSize
       def build_time_off(node)
         @current_node = node
         instance = Models::TimeOffRequest.new(@current_node.ID, @current_node.Status)
@@ -45,11 +49,11 @@ module TeamMakerIntegrations
           comment: node_text('Comment')
         )
       end
+      #  rubocop:enable Metrics/AbcSize
+      #  rubocop:enable Metrics/MethodLength
 
       def node_text(key)
-        unless @current_node.locate(key).empty?
-          @current_node.send(key).text
-        end
+        @current_node.send(key).text&.encode(ENCODING) unless @current_node.locate(key).empty?
       end
 
       def to_date(date_str)

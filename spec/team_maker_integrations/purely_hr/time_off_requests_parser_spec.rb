@@ -4,6 +4,7 @@ RSpec.describe TeamMakerIntegrations::PurelyHR::TimeOffRequestsParser do
   describe '#time_offs' do
     let(:xml_time_offs) { File.read('spec/fixtures/xmls/timeoffs.xml') }
     let(:xml_time_off) { File.read('spec/fixtures/xmls/timeoff.xml') }
+    let(:xml_encoding) { File.read('spec/fixtures/xmls/timeoff_encoding_spec.xml') }
 
     context 'with multiple data' do
       it 'parses all data' do
@@ -43,6 +44,20 @@ RSpec.describe TeamMakerIntegrations::PurelyHR::TimeOffRequestsParser do
 
       it 'builds the model with all data' do
         expect(parser.time_offs.first).to have_attributes expected_attributes
+      end
+    end
+
+    context 'with an ISO 8859-1 encoded string' do
+      let(:parser) { described_class.new xml_encoding }
+
+      it 'converts the data to UTF-8' do
+        parsed_data = parser.time_offs.first
+        expect(parsed_data.first_name.encoding.name).to eq 'UTF-8'
+      end
+
+      it 'sets the name on the right encoding' do
+        parsed_data = parser.time_offs.first
+        expect(parsed_data.first_name).to eq 'Tím'
       end
     end
 
