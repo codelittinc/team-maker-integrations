@@ -7,15 +7,16 @@ module TeamMakerIntegrations
   module PurelyHR
     class TimeOffRequestsParser
       ROOT_TAG = 'DataService'
-      ENCODING = 'UTF-8'
+      UTF8 = 'UTF-8'
+      ASC_II = 'ASCII-8BIT'
 
       def initialize(xml)
         @xml = xml
         @current_node = nil
+        @is_ascii = @xml && @xml.encoding.name == ASC_II
       end
 
       def time_offs
-        Ox.default_options = { encoding: ENCODING }
         xml = Ox.parse(@xml)
         root = xml&.nodes&.first
 
@@ -53,7 +54,10 @@ module TeamMakerIntegrations
       #  rubocop:enable Metrics/MethodLength
 
       def node_text(key)
-        @current_node.send(key).text&.encode(ENCODING) unless @current_node.locate(key).empty?
+        return nil if @current_node.locate(key).empty?
+
+        text = @current_node.send(key).text
+        @is_ascii ? text&.force_encoding(UTF8) : text&.encode(UTF8)
       end
 
       def to_date(date_str)
