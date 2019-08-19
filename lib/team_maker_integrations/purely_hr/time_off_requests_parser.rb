@@ -56,7 +56,7 @@ module TeamMakerIntegrations
       def node_text(key)
         return nil if @current_node.locate(key).empty?
 
-        text = @current_node.send(key).text
+        text = @current_node.send(key).text&.strip
         @is_ascii ? text&.force_encoding(UTF8) : text&.encode(UTF8)
       end
 

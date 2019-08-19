@@ -5,6 +5,7 @@ RSpec.describe TeamMakerIntegrations::PurelyHR::TimeOffRequestsParser do
     let(:xml_time_offs) { File.read('spec/fixtures/xmls/timeoffs.xml') }
     let(:xml_time_off) { File.read('spec/fixtures/xmls/timeoff.xml') }
     let(:xml_encoding) { File.read('spec/fixtures/xmls/timeoff_encoding_spec.xml') }
+    let(:xml_with_blank) { File.read('spec/fixtures/xmls/timeoff_with_blanks.xml') }
 
     context 'with multiple data' do
       it 'parses all data' do
@@ -58,6 +59,20 @@ RSpec.describe TeamMakerIntegrations::PurelyHR::TimeOffRequestsParser do
       it 'sets the name on the right encoding' do
         parsed_data = parser.time_offs.first
         expect(parsed_data.first_name).to eq 'Tím'
+      end
+    end
+
+    context 'with blank space after the FirstName' do
+      let(:parser) { described_class.new xml_with_blank }
+
+      it 'removes the extra empty space in the end of the string' do
+        parsed_data = parser.time_offs.first
+        expect(parsed_data.first_name).to eq 'Bruce'
+      end
+
+      it 'removes the extra empty space in the beggining of the string' do
+        parsed_data = parser.time_offs.first
+        expect(parsed_data.last_name).to eq 'Wayne'
       end
     end
 
